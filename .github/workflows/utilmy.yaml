@@ -1,0 +1,44 @@
+name: utilmy
+
+###  https://github.com/arita37/awesome-actions#static-analysis
+
+on:
+  workflow_dispatch:
+    inputs:  
+    
+  push:
+    branches:
+    - main
+
+  schedule:
+    - cron:  '*/5 * * * *'      #### 60mins
+
+
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+    #- uses: actions/checkout@v1
+    #  ref: ${{ github.head_ref }
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}
+        
+    - name: Set up Python 3.7.*
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7.*
+      
+    - name: Install pipenv
+      uses: dschep/install-pipenv-action@v1
+      
+  
+    - name: Install utilmy
+      run:  |
+        pip install utilmy
+
+
+
+
